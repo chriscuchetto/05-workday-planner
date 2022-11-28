@@ -34,4 +34,4 @@ THEN the saved events persist
 
 
 ## Contributors
-Christoper Cuchetto: made officially: 11/27/2022 at 9:03PM
+Christopher Cuchetto: made officially: 11/27/2022 at 9:03PM
