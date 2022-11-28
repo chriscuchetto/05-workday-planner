@@ -8,28 +8,55 @@ $(document).ready(function () {
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
+  $(".saveBtn").on("click", function () {
+//get values of parent and description
+let parent = $(this).parent().attr("id");
+let description = $(this).siblings(".description").val(); 
+console.log(parent, description);
+localStorage.setItem(parent, description);
+  });
+
   //
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  //
+ $(".time-block").each(function() {
+   $(this).removeClass("future");
+   $(this).removeClass("past");
+   $(this).removeClass("present");
+  let hour = parseInt($(this).attr("id").split("-")[1]);
+
+  if (hour > dayjs().hour()) {
+    $(this).addClass("future");
+  } else if (hour === dayjs().hour()) {
+    $(this).addClass("present");
+  } else {
+    $(this).addClass("past");
+  }
+ });
+
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
   //
   //Saved data will be loaded from local storage
-$("#hour-9 .description").val(localStorage.getItem("hour-9"));
-$("#hour-10 .description").val(localStorage.getItem("hour-10"));
-$("#hour-11 .description").val(localStorage.getItem("hour-11"));
-$("#hour-12 .description").val(localStorage.getItem("hour-12"));
-$("#hour-13 .description").val(localStorage.getItem("hour-13"));
-$("#hour-14 .description").val(localStorage.getItem("hour-14"));
-$("#hour-15 .description").val(localStorage.getItem("hour-15"));
-$("#hour-16 .description").val(localStorage.getItem("hour-16"));
-$("#hour-17 .description").val(localStorage.getItem("hour-17"));
+
+$("#hour-9").children(".description").val( localStorage.getItem("hour-9"));
+$("#hour-10").children(".description").val( localStorage.getItem("hour-10"));
+$("#hour-11").children(".description").val( localStorage.getItem("hour-11"));
+$("#hour-12").children(".description").val( localStorage.getItem("hour-12"));
+$("#hour-13").children(".description").val( localStorage.getItem("hour-13"));
+$("#hour-14").children(".description").val( localStorage.getItem("hour-14"));
+$("#hour-15").children(".description").val( localStorage.getItem("hour-15"));
+$("#hour-16").children(".description").val( localStorage.getItem("hour-16"));
+$("#hour-17").children(".description").val( localStorage.getItem("hour-17"));
+
   // TODO: Add code to display the current date in the header of the page.
   //Sets the date format to be displayed on the planner
+// Setting the date format in currentDay id on the pTag in the header
+
   $("#currentDay").text(dayjs().format("dddd, MMMM D, YYYY"));
+  
 });
